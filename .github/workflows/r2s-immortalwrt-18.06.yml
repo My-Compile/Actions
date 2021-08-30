@@ -3,7 +3,6 @@ name: r2s-immortalwrt-18.06
 on:
   repository_dispatch:
   workflow_dispatch:
-    inputs:
   schedule:
     - cron: '10 21 */3 * *'
   watch:
@@ -68,6 +67,8 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        sed -i 's/5.4/5.10/g' target/linux/rockchip/Makefile
+        
     - name: Download package
       id: package
       run: |

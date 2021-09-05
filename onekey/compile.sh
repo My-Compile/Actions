@@ -1,7 +1,7 @@
 #/bin/bash
 echo
 echo
-echo "本脚本仅适用于在Ubuntu环境下编译 https://github-dotcom.gateway.web.tr/kiddin9/OpenWrt_x86-r2s-r4s"
+echo "本脚本仅适用于在Ubuntu环境下编译 https://github.com/kiddin9/OpenWrt_x86-r2s-r4s"
 echo
 echo
 sleep 2s
@@ -42,11 +42,17 @@ fi
 rm -Rf openwrt
 
 echo "
+
 1. X86_64
+
 2. r2s
+
 3. r4s
+
 4. Rpi-4B
+
 5. Exit
+
 "
 
 while :; do
@@ -76,10 +82,10 @@ case $CHOOSE in
 esac
 done
 
-REPO_BRANCH="$(git ls-remote --tags git://github-dotcom.gateway.web.tr/openwrt/openwrt | cut -d/ -f3- | sort -t. -nk1,2 | awk '/^[^{]*$/{version=$1}END{print version}'| sed -e 's/v//')"
+REPO_BRANCH="$(git ls-remote --tags git://github.com/openwrt/openwrt | cut -d/ -f3- | sort -t. -nk1,2 | awk '/^[^{]*$/{version=$1}END{print version}'| sed -e 's/v//')"
 
-git clone -b v$REPO_BRANCH --depth 1 https://github-dotcom.gateway.web.tr/openwrt/openwrt
-svn export https://github-dotcom.gateway.web.tr/kiddin9/OpenWrt_x86-r2s-r4s/trunk/devices openwrt/devices
+git clone -b v$REPO_BRANCH --depth 1 https://github.com/openwrt/openwrt
+svn export https://github.com/kiddin9/OpenWrt_x86-r2s-r4s/trunk/devices openwrt/devices
 
 cd openwrt
 if [[ $firmware == "x86_64" ]]; then
@@ -127,7 +133,9 @@ echo
 echo
 echo
 echo "                      *****5秒后开始编译*****
+
 1.你可以随时按Ctrl+C停止编译
+
 3.大陆用户编译前请准备好梯子,使用大陆白名单或全局模式"
 echo
 echo
@@ -139,8 +147,11 @@ make -j$(($(nproc)+1)) || make -j1 V=s
 
 if [ "$?" == "0" ]; then
 echo "
+
 编译完成~~~
+
 初始后台地址: $ip
 初始用户名密码: root  root
+
 "
 fi
